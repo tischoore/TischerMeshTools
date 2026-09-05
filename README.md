@@ -37,6 +37,7 @@ Once `settings.json` is set up, you don't need to invoke that interpreter by han
 | `ply_to_stl.py` | Loads a PLY mesh and serializes it as STL. Run with `--input <path.ply> --output <path.stl>`, and pass `--overwrite` to allow replacing an existing output file (otherwise it refuses to overwrite). |
 | `voxel_fix.py` | Loads a binary PLY mesh and repairs it using Blender's voxel remesh. Run with `--input <path.ply> --output <path.ply> --voxel-size <size>`. |
 | `mesh_fix.py` | Pipeline that converts an STL to PLY, repairs it with `voxel_fix.py`, then converts the result back to STL. Run with `--input <path.stl> --output <path.stl> --voxel-size <size>`, and pass `--overwrite` to allow replacing an existing output file (otherwise it refuses to overwrite). |
+| `fix_folder.py` | Runs the `mesh_fix.py` repair pipeline over every `.stl` file in a directory. Run with `--input <dir> --voxel-size <size>`, optionally `--output <dir>` (defaults to writing `<name>_mesh_fix.stl` next to each input), `--recursive` to include subfolders, and `--overwrite` to allow replacing existing outputs. Per-file failures are logged and skipped rather than stopping the batch; the script exits non-zero if any file failed. |
 
 ## Tests
 
