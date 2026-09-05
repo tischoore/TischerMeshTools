@@ -22,10 +22,12 @@ These scripts rely on the Python distribution bundled with Blender (for the `bpy
    ```
    "C:\Program Files\Blender Foundation\Blender 5.1\5.1\python\bin\python.exe" -m pip install <package>
    ```
-5. This repo's scripts and tests currently require `trimesh` (and its dependency `numpy`) and `pytest`:
+5. This repo's scripts and tests currently require `trimesh` (and its dependency `numpy`), `pytest`, and the standalone `bpy` package matching your installed Blender version:
    ```
-   "C:\Program Files\Blender Foundation\Blender 5.1\5.1\python\bin\python.exe" -m pip install trimesh pytest
+   "C:\Program Files\Blender Foundation\Blender 5.1\5.1\python\bin\python.exe" -m pip install trimesh pytest bpy==5.1.2
    ```
+
+Once `settings.json` is set up, you don't need to invoke that interpreter by hand: each script (via the shared `blender_python.py` helper) detects when it's been started with a different Python, and automatically relaunches itself under the `python_executable` from `settings.json`. So `python mesh_fix.py --input ...` works from any Python on your PATH, as long as `settings.json` points at a working Blender Python with the dependencies above installed.
 
 ## Scripts
 
@@ -33,6 +35,8 @@ These scripts rely on the Python distribution bundled with Blender (for the `bpy
 | --- | --- |
 | `stl_to_ply.py` | Loads an STL mesh and serializes it as binary PLY. Run with `--input <path.stl> --output <path.ply>`. |
 | `ply_to_stl.py` | Loads a PLY mesh and serializes it as STL. Run with `--input <path.ply> --output <path.stl>`, and pass `--overwrite` to allow replacing an existing output file (otherwise it refuses to overwrite). |
+| `voxel_fix.py` | Loads a binary PLY mesh and repairs it using Blender's voxel remesh. Run with `--input <path.ply> --output <path.ply> --voxel-size <size>`. |
+| `mesh_fix.py` | Pipeline that converts an STL to PLY, repairs it with `voxel_fix.py`, then converts the result back to STL. Run with `--input <path.stl> --output <path.stl> --voxel-size <size>`, and pass `--overwrite` to allow replacing an existing output file (otherwise it refuses to overwrite). |
 
 ## Tests
 

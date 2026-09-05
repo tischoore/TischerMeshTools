@@ -7,7 +7,12 @@ Usage:
 import argparse
 import os
 
-import trimesh
+try:
+    import trimesh
+except ImportError:
+    from blender_python import relaunch_under_blender_python
+
+    relaunch_under_blender_python()
 
 
 def convert(input_path, output_path, overwrite=False):
