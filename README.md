@@ -22,11 +22,21 @@ These scripts rely on the Python distribution bundled with Blender (for the `bpy
    ```
    "C:\Program Files\Blender Foundation\Blender 5.1\5.1\python\bin\python.exe" -m pip install <package>
    ```
+5. This repo's scripts and tests currently require `trimesh` (and its dependency `numpy`) and `pytest`:
+   ```
+   "C:\Program Files\Blender Foundation\Blender 5.1\5.1\python\bin\python.exe" -m pip install trimesh pytest
+   ```
 
 ## Scripts
 
-No scripts have been added yet. As scripts are added to this repository, list each one here with its name, a one-line description of its single purpose, and how to run it, for example:
-
 | Script | Purpose |
 | --- | --- |
-| `script_name.py` | One-sentence description of the single thing this script does. |
+| `stl_to_ply.py` | Loads an STL mesh and serializes it as binary PLY. Run with `--input <path.stl> --output <path.ply>`. |
+| `ply_to_stl.py` | Loads a PLY mesh and serializes it as STL. Run with `--input <path.ply> --output <path.stl>`, and pass `--overwrite` to allow replacing an existing output file (otherwise it refuses to overwrite). |
+
+## Tests
+
+Tests live in `tests/` and run with pytest, using the Blender-bundled interpreter:
+```
+"C:\Program Files\Blender Foundation\Blender 5.1\5.1\python\bin\python.exe" -m pytest tests/
+```
